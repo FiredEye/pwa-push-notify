@@ -6,7 +6,7 @@ import "./App.css";
 import { collection, setDoc, doc } from "firebase/firestore";
 import { v4 as uuidv4 } from "uuid";
 function App() {
-  async function requestPermission() {
+  async function requestNotificationPermission() {
     
     const permission = await Notification.requestPermission();
     if (permission === "granted") {
@@ -39,10 +39,20 @@ function App() {
     }
   }
 
-  // useEffect(() => {
-  //   // Req user for notification permission
-  //   requestPermission();
-  // }, []);
+  async function requestPermission() {
+    const permission = await Notification.requestPermission();
+    if (permission === "granted") {
+      console.log('permission granted!')
+      
+      // Send this token  to server ( db)
+    } else if (permission === "denied") {
+      alert("You denied for the notification");
+    }
+  }
+  useEffect(() => {
+    // Req user for notification permission
+    requestPermission();
+  }, []);
 
   const sendNotification = () => {
     // Check if the browser supports notifications
@@ -68,7 +78,7 @@ function App() {
 
   return (
     <div>
-      <button onClick={requestPermission}>
+      <button onClick={requestNotificationPermission}>
         Request Notification Permission
       </button>
       <button onClick={sendNotification}>Send Notification</button>
