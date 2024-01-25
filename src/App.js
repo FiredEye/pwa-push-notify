@@ -34,7 +34,7 @@ function App() {
           uid: newUid,
           deviceToken: token,
         });
-        
+
         console.log("Token stored successfully");
 
         // // Delete Token
@@ -58,27 +58,27 @@ function App() {
       console.log("You denied for the notification");
     }
   }
-  // const sendNotification = () => {
-  //   // Check if the browser supports notifications
-  //   if ("Notification" in window) {
-  //     // Check if the user has granted permission
-  //     if (Notification.permission === "granted") {
-  //       // Create and show the notification
-  //       const notification = new Notification("Hello, Notification!", {
-  //         body: "This is a sample notification.",
-  //       });
+  const previewNotification = () => {
+    // Check if the browser supports notifications
+    if ("Notification" in window) {
+      // Check if the user has granted permission
+      if (Notification.permission === "granted") {
+        // Create and show the notification
+        const notification = new Notification("Hello, Notification!", {
+          body: "This is a sample notification.",
+        });
 
-  //       // You can also handle click events on the notification
-  //       notification.onclick = function () {
-  //         console.log("Notification clicked!");
-  //       };
-  //     } else {
-  //       console.warn("Permission for notifications not granted");
-  //     }
-  //   } else {
-  //     console.warn("Notifications not supported in this browser");
-  //   }
-  // };
+        // You can also handle click events on the notification
+        notification.onclick = function () {
+          console.log("Notification clicked!");
+        };
+      } else {
+        console.warn("Permission for notifications not granted");
+      }
+    } else {
+      console.warn("Notifications not supported in this browser");
+    }
+  };
 
   return (
     <div>
@@ -86,6 +86,7 @@ function App() {
         Request Notification Permission
       </button>
       <button onClick={sendToken}>Send Token</button>
+      <button onClick={previewNotification}>Preview Notification</button>
     </div>
   );
 }
