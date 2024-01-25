@@ -1,5 +1,5 @@
 import { messaging, db } from "./firebase";
-import { getToken, deleteToken } from "firebase/messaging";
+import { getToken,deleteToken } from "firebase/messaging";
 import "./App.css";
 import { collection, setDoc, doc } from "firebase/firestore";
 import { v4 as uuidv4 } from "uuid";
@@ -12,6 +12,7 @@ function App() {
 
       // If 'localToken' is present, return from the function
       if (localToken) {
+        console.log("Token already generated");
         return;
       }
 
@@ -33,9 +34,12 @@ function App() {
           uid: newUid,
           deviceToken: token,
         });
-        // Delete Token
-        await deleteToken(messaging);
-        console.log("Token unsubscribed successfully");
+        
+        console.log("Token stored successfully");
+
+        // // Delete Token
+        // await deleteToken(messaging);
+        // console.log("Token unsubscribed successfully");
       } catch (error) {
         console.error("Error generating or unsubscribing token:", error);
       }
