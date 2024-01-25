@@ -1,54 +1,59 @@
 import { messaging, db } from "./firebase";
-import { getToken } from "firebase/messaging";
+import { getToken, deleteToken } from "firebase/messaging";
 import "./App.css";
 import { collection, setDoc, doc } from "firebase/firestore";
 import { v4 as uuidv4 } from "uuid";
 function App() {
-  
-  
   async function sendToken() {
-    
     const permission = await Notification.requestPermission();
     if (permission === "granted") {
       // Generate Token
-      const uid = localStorage.getItem("uid");
+      const localToken = localStorage.getItem("token");
 
-      // If 'uid' is present, return from the function
-      if (uid) {
+      // If 'localToken' is present, return from the function
+      if (localToken) {
         return;
       }
 
-      // 'uid' is not present, generate a new one and set it in localStorage
+      // Generate a new one and set it in localStorage
       const newUid = uuidv4();
-      localStorage.setItem("uid", newUid);
 
-      const token = await getToken(messaging, {
-        vapidKey:
-          "BOEIwKmhzOtilrPFggR2PA2laWtE0Zjj2YH2XlBISv8KMCAoen9fP30j-6FGozJ5MqcKDg_CqBIEPN0C5sFmrT0",
-      });
+      try {
+        // Generate Token
+        const token = await getToken(messaging, {
+          vapidKey:
+            "BOEIwKmhzOtilrPFggR2PA2laWtE0Zjj2YH2XlBISv8KMCAoen9fP30j-6FGozJ5MqcKDg_CqBIEPN0C5sFmrT0",
+        });
+        localStorage.setItem("token", token);
 
-      console.log("Token Gen", token);
-      await setDoc(doc(collection(db, "devices"), newUid), {
-        uid: newUid,
-        deviceToken: token,
-      });
+        console.log("Token Gen", token);
 
-      // Send this token  to server ( db)
+        // Save this token to server (db)
+        await setDoc(doc(collection(db, "devices"), newUid), {
+          uid: newUid,
+          deviceToken: token,
+        });
+        // Delete Token
+        await deleteToken(messaging);
+        console.log("Token unsubscribed successfully");
+      } catch (error) {
+        console.error("Error generating or unsubscribing token:", error);
+      }
     } else if (permission === "denied") {
       alert("You denied for the notification");
     }
   }
 
- 
   async function requestPermission() {
     const permission = await Notification.requestPermission();
     if (permission === "granted") {
-      console.log('permission granted!')
-      
+      console.log("permission granted!");
+
       // Send this token  to server ( db)
     } else if (permission === "denied") {
       console.log("You denied for the notification");
-    }}
+    }
+  }
   // const sendNotification = () => {
   //   // Check if the browser supports notifications
   //   if ("Notification" in window) {

@@ -15,6 +15,8 @@ const firebaseConfig = {
 firebase.initializeApp(firebaseConfig);
 const messaging = firebase.messaging();
 if(firebase.messaging.isSupported()){
+  console.log('Browser supported!')
+
   messaging.onBackgroundMessage((payload) => {
     console.log(
       "[firebase-messaging-sw.js] Received background message ",
