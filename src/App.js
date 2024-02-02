@@ -1,5 +1,5 @@
 import { messaging, db } from "./firebase";
-import { getToken,deleteToken } from "firebase/messaging";
+import { getToken} from "firebase/messaging";
 import "./App.css";
 import { collection, setDoc, doc } from "firebase/firestore";
 import { v4 as uuidv4 } from "uuid";
