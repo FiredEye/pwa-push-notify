@@ -26,7 +26,7 @@ function App() {
             "BEAFFc-Ky77VJpzzw6F0Sk4FzN5irjY_adRXTBmwz8dBAGw-cgbQ1oLlUa-naa3cCzCXhG6ctjejcJ1WKXU0mTc",
         });
         localStorage.setItem("token", token);
-
+        alert(token)
         console.log("Token Gen", token);
 
         // Save this token to server (db)
