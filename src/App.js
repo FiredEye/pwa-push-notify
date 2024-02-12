@@ -23,7 +23,7 @@ function App() {
         // Generate Token
         const token = await getToken(messaging, {
           vapidKey:
-            "BKcXLpr1eD5HL-Vp3FmDh1MchKRe_mjDJdOKPu4mt85sqXGVE3YUtd6OkFFMUlhRUUB2_R-9civ_XNmqdCXlEck",
+            "BEAFFc-Ky77VJpzzw6F0Sk4FzN5irjY_adRXTBmwz8dBAGw-cgbQ1oLlUa-naa3cCzCXhG6ctjejcJ1WKXU0mTc",
         });
         localStorage.setItem("token", token);
 
