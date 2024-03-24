@@ -4,12 +4,13 @@ importScripts(
 );
 
 const firebaseConfig = {
-  apiKey: "AIzaSyCl_g6IT5mUqRe_I2Rgj13xDK6bYFl8xaM",
-  authDomain: "push-notify-7819b.firebaseapp.com",
-  projectId: "push-notify-7819b",
-  storageBucket: "push-notify-7819b.appspot.com",
-  messagingSenderId: "1022731595960",
-  appId: "1:1022731595960:web:6d76205360c3d97a7d044d"
+ apiKey: "AIzaSyBu2emmod70NGOcDid_q81x3gP6FAW-Ro8",
+  authDomain: "push-notify-b8795.firebaseapp.com",
+  databaseURL: "https://push-notify-b8795-default-rtdb.firebaseio.com",
+  projectId: "push-notify-b8795",
+  storageBucket: "push-notify-b8795.appspot.com",
+  messagingSenderId: "131374839398",
+  appId: "1:131374839398:web:3fa637d133a5407c65dfa7",
 };
 
 firebase.initializeApp(firebaseConfig);
