@@ -17,23 +17,23 @@ function App() {
       }
 
       // Generate a new one and set it in localStorage
-      const newUid = uuidv4();
+      // const newUid = uuidv4();
 
       try {
         // Generate Token
         const token = await getToken(messaging, {
           vapidKey:
-            "BEAFFc-Ky77VJpzzw6F0Sk4FzN5irjY_adRXTBmwz8dBAGw-cgbQ1oLlUa-naa3cCzCXhG6ctjejcJ1WKXU0mTc",
+            "BOG2VRDTWHk-A5JlyAQ1vJg1keK5tD2Qp1zPVrnM0pEqX--zkU4tDv3X6NGEdGTPfCIvmDS8utuGwJDzEfPASRs",
         });
         localStorage.setItem("token", token);
         alert(token)
         console.log("Token Gen", token);
 
         // Save this token to server (db)
-        await setDoc(doc(collection(db, "devices"), newUid), {
-          uid: newUid,
-          deviceToken: token,
-        });
+        // await setDoc(doc(collection(db, "devices"), newUid), {
+        //   uid: newUid,
+        //   deviceToken: token,
+        // });
 
         console.log("Token stored successfully");
 
@@ -81,7 +81,7 @@ function App() {
   };
 
   return (
-    <div>
+    <div>{localStorage['token']?localStorage['token']:""}<br/><br/>
       <button onClick={requestPermission}>
         Request Notification Permission
       </button>
